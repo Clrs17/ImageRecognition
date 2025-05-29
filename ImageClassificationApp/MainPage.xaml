@@ -1,0 +1,76 @@
+﻿<Page
+    x:Class="ImageClassificationApp.MainPage"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:local="using:ImageClassificationApp"
+    xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    xmlns:muxc="using:Microsoft.UI.Xaml.Controls"
+    mc:Ignorable="d"
+    Background="{ThemeResource SystemControlAcrylicWindowBrush}">
+    <Grid>
+        <Grid.RowDefinitions>
+            <RowDefinition
+                Height="100" />
+            <RowDefinition />
+        </Grid.RowDefinitions>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition />
+            <ColumnDefinition />
+        </Grid.ColumnDefinitions>
+        <Button
+            x:Name="PickPicture"
+            Content="选择图片并分类"
+            Grid.Column="0"
+            HorizontalAlignment="Center"
+            VerticalAlignment="Center"
+            Click="PickPicture_Click" />
+        <Button
+            x:Name="ClearPicture"
+            Content="清空图片"
+            Grid.Column="1"
+            HorizontalAlignment="Center"
+            VerticalAlignment="Center"
+            Click="ClearPicture_Click" />
+        <Border
+            Grid.ColumnSpan="2"
+            Grid.Row="1"
+            Margin="10"
+            BorderThickness="2"
+            CornerRadius="8"
+            BorderBrush="{StaticResource TextBoxBorderThemeBrush}">
+            <Grid
+                AllowDrop="True"
+                DragOver="ImageDragSystem_DragOver"
+                Drop="ImageDragSystem_Drop"
+                HorizontalAlignment="Stretch"
+                VerticalAlignment="Stretch"
+                Background="Transparent">
+                <Image
+                    x:Name="ImageShow"
+                    HorizontalAlignment="Stretch"
+                    VerticalAlignment="Stretch"
+                    Canvas.ZIndex="2" />
+                <TextBlock
+                    Text="将图片拖拽到此处"
+                    HorizontalAlignment="Center"
+                    VerticalAlignment="Center"
+                    x:Name="DragAvailableIndicator"/>
+                <StackPanel
+                    VerticalAlignment="Center"
+                    HorizontalAlignment="Center"
+                    x:Name="RecognizingIndicator"
+                    Visibility="Collapsed">
+                    <muxc:ProgressRing
+                        IsActive="True"
+                        Height="100"
+                        Width="100"
+                        Margin="20" />
+                    <TextBlock
+                        Text="识别中"
+                        HorizontalAlignment="Center" />
+                </StackPanel>
+            </Grid>
+        </Border>
+    </Grid>
+</Page>
